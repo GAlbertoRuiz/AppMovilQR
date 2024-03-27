@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { Cuadro } from "../components/TextInput"
 import { Botoon } from "../components/Button"
 import { styleForm } from "../styles/Form"
+import axios from "axios"
 
 type FormProps = NativeStackScreenProps<RootStackParamList, 'Form'>
 
@@ -14,28 +15,7 @@ export interface objetito {
     color: string;
   };
 
-//  export interface FormData {
-//     nombrito: string;
-//     modelito: string;
-//     colorito: string;
-//   };
-  
-
-  // var objetoPost: objetito = {
-  //   name: '',
-  //   model: '',
-  //   color: '',
-  // }
-
-
-
 export const Form = ({navigation,route} : FormProps) => {
-
-    // const [initialValues, setInitialValues] = useState({
-    //     nombrito: '',
-    //     modelito: '',
-    //     colorito: '',
-    //   });
 
       
     const [initialValues, setInitialValues] = useState<objetito>({
@@ -43,21 +23,6 @@ export const Form = ({navigation,route} : FormProps) => {
       model: '',
       color: '',
     });
-    
-      // useEffect(() => {
-      //   // Código para inicializar valores aquí
-      //   setInitialValues({
-      //     nombrito: route.params.nombre || '',
-      //     modelito: route.params.modelo || '',
-      //     colorito: route.params.color || '',
-      //   });
-      //   console.log(route.params.nombre);    
-      //   console.log(route.params.modelo);
-      //   console.log(route.params.color);
-        
-      // // }, [route.params]);
-      // }, []);
-
 
       useEffect(() => {
         // Código para inicializar valores aquí
@@ -77,11 +42,23 @@ export const Form = ({navigation,route} : FormProps) => {
       // }, [route.params]);
       }, []);
 
-      const handlePress = () => {
-        // PetPost(initialValues);
+      const handlePress = async () => {
+          // PetPost(initialValues);
+              console.log('hizo click para enviar POST');
+              try {
+                const response = await axios.post('http://10.0.2.2:3000/users', initialValues);
+                // console.log('Respuesta del servidor:', response.data);
+                console.log('Respuesta del servidor:', initialValues);
+                // Aquí puedes manejar la respuesta del servidor según tus necesidades
+              } catch (error) {
+                console.error('Error al enviar POST:', error);
+              }
+            
+
         console.log('POST INITIALVALUES',initialValues);
         
-        navigation.navigate('TodoPet', initialValues )
+        // navigation.navigate('TodoPet', initialValues )
+        navigation.popToTop();
       }
 
 

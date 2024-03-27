@@ -5,8 +5,10 @@ import { Home } from "../screens/Home";
 import { QR } from "../screens/QR";
 import { Form, objetito } from "../screens/Form";
 import { UsersList } from "../screens/UserList";
-import { TodoPet } from "../screens/pantallitas/todoPet";
-import { UpdPet } from "../screens/pantallitas/updPet";
+import { ModifyUsers } from "../screens/ModifyUsers";
+// import { UpdPet, ide } from "../screens/pantallitas/updPet";
+import { string } from "prop-types";
+import { UpdateUsers } from "../screens/pantallitas/UpdateUser";
 
 
 export type RootStackParamList = {
@@ -18,8 +20,12 @@ export type RootStackParamList = {
             color: string
         };
     UsersList: undefined;
-    TodoPet: objetito;
-    UpdPet: any;
+    // TodoPet: objetito;
+    ModifyUsers: undefined;
+    UpdateUsers: {
+        idUp: string;
+    };
+    // UpdPet: any;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -32,8 +38,8 @@ export const MainStack = () => {
             <Stack.Screen name="QR" component={QR} />
             <Stack.Screen name="Form" component={Form} />
             <Stack.Screen name="UsersList" component={UsersList} />
-            <Stack.Screen name="TodoPet" component={TodoPet} />
-            <Stack.Screen name="UpdPet" component={UpdPet} />
+            <Stack.Screen name="ModifyUsers" component={ModifyUsers} />
+            <Stack.Screen name="UpdateUsers" component={UpdateUsers} />
         </Stack.Navigator>
     )
 }

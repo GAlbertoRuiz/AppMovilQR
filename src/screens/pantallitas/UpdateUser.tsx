@@ -4,9 +4,11 @@ import axios from 'axios';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/main';
 
-export type UpdPetProps = NativeStackScreenProps<RootStackParamList, 'UpdPet'>
+export type UpdPetProps = NativeStackScreenProps<RootStackParamList, 'UpdateUsers'>
 
-
+export interface ide {
+  userId: string;
+}
 
 interface PostDataU {
   name: string;
@@ -16,7 +18,7 @@ interface PostDataU {
 
 }
 
-  export function UpdPet(yuseraidi: any): React.ReactElement {
+  export function UpdateUsers({navigation, route}: UpdPetProps): React.ReactElement {
   const [postDataU, setPostDataU] = useState<PostDataU>({
     name: '',
     model: '',
@@ -26,15 +28,17 @@ interface PostDataU {
 
 
     const handlePressUpdPet = async () => {
-        setLoading(true);
-        try {
-        await axios.delete(`http://10.0.2.2:3000/users/${yuseraidi}`, );
-        console.log('Usuario eliminado con éxito:', yuseraidi);
-        } catch (error) {
-        console.error('Error deleting user:', error);
-        } finally {
-        setLoading(false);
-        }
+      setLoading(true);
+      try {
+      await axios.put(`http://10.0.2.2:3000/users/${route.params.idUp}`, postDataU );
+      console.log('Usuario actualizado con éxito:', route.params.idUp);
+      } catch (error) {
+      console.error('Error UpDate user:', error);
+      } finally {
+      setLoading(false);
+      }
+      
+      navigation.goBack();
     }
 
   return (

@@ -17,7 +17,8 @@ export const Home = ({navigation} : HomeProps) => {
     };
     
     const handlePress2 = () => {
-        navigation.navigate('UsersList')
+        // navigation.navigate('UsersList')
+        navigation.navigate('ModifyUsers')
       }
 
     return (
